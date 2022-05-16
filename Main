@@ -1,42 +1,51 @@
-public class Student {
+import java.util.Scanner;
 
-    Student(){
-        System.out.println("--Student management system--");
-        System.out.println("--Develop by Ishan S Dulanjana--");
-        System.out.println("#1.0 Editionsdsd");
-        System.out.println("**********************************************************************************");
-        System.out.println();
-    }
+public class main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
 
-    public void studentDetail(String name , String address){
-        System.out.println("Student name : " + name);
-        System.out.println("Student address" + address);
-    }
+        System.out.println("Enter student name : ");
+        String name = input.next();
 
-    public void showAllMarks(int[] marks){
-        for (int i = 0; i < marks.length; i++) {
-            System.out.println("Subject " + (i+1) + "mark : ");
+        System.out.println("Enter student address : ");
+        String address =input.next();
+
+        System.out.println("Enter number of subject : ");
+        int subject = input.nextInt();
+
+        int[] marks = new int[subject];
+
+        for (int i = 0; i < subject; i++) {
+            System.out.println("Enter subject " + (i + 1) + "marks");
+            marks[i] = input.nextInt();
         }
-    }
 
-    public int calculateTotal(int[] marks){
-        int total = 0;
-        for (int i = 0; i < marks.length; i++) {
-            total = total + marks[i];
+        System.out.println("A. Student detail ");
+        System.out.println("B. Show all marks ");
+        System.out.println("C. Calculate total ");
+        System.out.println("D. Show result ");
+
+        String latter = input.next();
+
+        Student student = new Student();
+
+        switch (latter){
+            case "A" :
+                student.studentDetail(name , address);
+                break;
+            case "B" :
+                student.showAllMarks(marks);
+                break;
+            case "C" :
+                student.calculateTotal(marks);
+                System.out.println(student.calculateTotal(marks));
+                break;
+            case "D" :
+                student.showResult(student.calculateTotal(marks),subject);
+                break;
+            default:
+                System.out.println("Enter valid input");
         }
-        return total;
-    }
-
-    public void showResult(int total,int subject){
-        double average = (double) total / subject;
-
-        String result = "FAIL";
-
-        if(average > 50){
-            result = "PASS";
-        }
-        System.out.println(result);
-
 
     }
 }
